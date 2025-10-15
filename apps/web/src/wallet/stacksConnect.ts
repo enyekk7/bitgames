@@ -17,7 +17,7 @@ const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 
 const network =
-  import.meta.env.VITE_STACKS_NETWORK === 'mainnet'
+  (import.meta as any).env?.VITE_STACKS_NETWORK === 'mainnet'
     ? new StacksMainnet()
     : new StacksTestnet();
 
@@ -45,7 +45,7 @@ export function disconnectWallet() {
 export function getStxAddress(): string | null {
   if (!userSession.isUserSignedIn()) return null;
   const data = userSession.loadUserData();
-  const isMainnet = import.meta.env.VITE_STACKS_NETWORK === 'mainnet';
+  const isMainnet = (import.meta as any).env?.VITE_STACKS_NETWORK === 'mainnet';
   return isMainnet ? data.profile?.stxAddress?.mainnet : data.profile?.stxAddress?.testnet;
 }
 
@@ -117,8 +117,8 @@ export async function submitScoreOnChain(
   const senderAddress = getStxAddress();
   if (!senderAddress) throw new Error('Wallet not connected');
 
-  const contractAddress = import.meta.env.VITE_GAME_REGISTRY_ADDRESS;
-  const contractName = import.meta.env.VITE_GAME_REGISTRY_NAME;
+  const contractAddress = (import.meta as any).env?.VITE_GAME_REGISTRY_ADDRESS;
+  const contractName = (import.meta as any).env?.VITE_GAME_REGISTRY_NAME;
 
   return new Promise((resolve, reject) => {
     openContractCall({

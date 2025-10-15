@@ -83,7 +83,7 @@ export default function GameCard({ game }: GameCardProps) {
               // Keep the image visible even if it fails to load
               e.currentTarget.style.display = 'block';
             }}
-            onLoad={(e) => {
+            onLoad={(_e) => {
               console.log('✅ Image loaded successfully:', game.thumbnail);
               console.log('✅ Game name:', game.name);
             }}

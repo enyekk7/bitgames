@@ -85,7 +85,7 @@ const SHARE_TEMPLATES = [
   }
 ];
 
-export default function ShareModal({ gameSlug, gameName, score, onShare, onClose, onPlayAgain }: ShareModalProps) {
+export default function ShareModal({ gameSlug: _gameSlug, gameName, score, onShare, onClose, onPlayAgain }: ShareModalProps) {
   const [message, setMessage] = useState(`Just scored ${score.toLocaleString()} in ${gameName}! 🎮`);
   const [sharing, setSharing] = useState(false);
   const [isClosing, setIsClosing] = useState(false);

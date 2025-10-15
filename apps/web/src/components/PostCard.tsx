@@ -64,7 +64,7 @@ export default function PostCard({ post, walletAddress, onTipSuccess }: PostCard
     }
   };
 
-  const totalTips = post.tips.reduce((sum, tip) => sum + tip.amount, 0); // Already in STX
+  const _totalTips = post.tips.reduce((sum, tip) => sum + tip.amount, 0); // Already in STX
 
   return (
     <>
