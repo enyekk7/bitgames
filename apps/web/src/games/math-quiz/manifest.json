@@ -1,0 +1,8 @@
+{
+  "slug": "math-quiz",
+  "name": "Math Quiz",
+  "description": "Test your math skills with multiplication and division!",
+  "thumbnail": "/games/math-quiz-thumb.png",
+  "type": "react",
+  "category": "educational"
+}

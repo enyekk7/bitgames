@@ -1,0 +1,11 @@
+{
+  "slug": "tictactoe",
+  "name": "Tic Tac Toe",
+  "description": "Classic Tic Tac Toe game vs AI Bot!",
+  "thumbnail": "/games/tictactoe-thumb.png",
+  "type": "react",
+  "category": "puzzle"
+}
+
+
+

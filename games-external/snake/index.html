@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>Game Ular Fullscreen</title>
+  <style>
+        body {
+      margin: 0;
+            overflow: hidden;
+            background-color: #111;
+            position: relative;
+            height: 100vh;
+      width: 100vw;
+        }
+        canvas {
+            display: block;
+            background-color: black;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            /* --- PERBAIKAN UNTUK GAMBAR BLUR --- */
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        /* Kontrol Ponsel */
+        #mobile-controls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+      display: none;
+            justify-content: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+        #mobile-controls.active {
+            display: flex;
+            pointer-events: auto;
+        }
+        .control-button {
+            width: 65px;
+            height: 65px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.7);
+            user-select: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        .control-button:active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        #d-pad {
+            display: grid;
+            grid-template-areas:
+                ". up ."
+                "left center right"
+                ". down .";
+            gap: 8px;
+        }
+        #d-pad .up { grid-area: up; }
+        #d-pad .down { grid-area: down; }
+        #d-pad .left { grid-area: left; }
+        #d-pad .right { grid-area: right; }
+        #d-pad .center { display: none; }
+  </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="mobile-controls">
+        <div id="d-pad">
+            <div class="control-button up" data-direction="up">⬆</div>
+            <div class="control-button left" data-direction="left">⬅</div>
+            <div class="control-button center"></div>
+            <div class="control-button right" data-direction="right">➡</div>
+            <div class="control-button down" data-direction="down">⬇</div>
+        </div>
+  </div>
+
+  <script>
+        const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+        const mobileControls = document.getElementById('mobile-controls');
+
+        const gridSize = 20;
+        let snake, food, direction, score, gameOver, gameInterval;
+
+        // --- PERUBAHAN DI SINI: Link gambar diganti ---
+        const foodImage = new Image();
+        foodImage.src = 'https://lqy3lriiybxcejon.public.blob.vercel-storage.com/g65FtoqzXX8t/4477a1e4970d9ce0314c82d5a23087a6-removebg-preview%20%281%29-NDDnFaWABaVrB0TtCEe6Xo4nlmttae.png?zS7w';
+
+
+        function resizeCanvas() {
+            const isMobile = window.innerWidth < 768;
+            const controlsHeight = isMobile ? mobileControls.offsetHeight + 40 : 0;
+            const topPadding = 20;
+
+            let availableHeight = window.innerHeight - controlsHeight - topPadding;
+            let availableWidth = window.innerWidth - 20;
+
+            let size = Math.min(availableWidth, availableHeight);
+            size = Math.floor(size / gridSize) * gridSize;
+
+            canvas.width = size;
+            canvas.height = size;
+
+            if (isMobile) {
+                mobileControls.classList.add('active');
+            } else {
+                mobileControls.classList.remove('active');
+            }
+
+            if (gameOver) {
+                draw();
+                drawGameOverScreen();
+            }
+        }
+
+        function drawBackgroundGrid() {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#222';
+            ctx.lineWidth = 1;
+            for (let x = 0; x <= canvas.width; x += gridSize) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y <= canvas.height; y += gridSize) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+            }
+        }
+        function drawSnake() {
+            ctx.fillStyle = 'orange';
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x * gridSize + 1, segment.y * gridSize + 1, gridSize - 2, gridSize - 2);
+            });
+        }
+        
+        function drawFood() {
+            if (foodImage.complete && foodImage.naturalWidth > 0) {
+                ctx.drawImage(foodImage, food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+            } else {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+            }
+        }
+
+        function drawScore() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '22px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText(score, canvas.width - 15, 30);
+        }
+        function drawGameOverScreen() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
+            ctx.font = '18px Arial';
+            ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+            ctx.font = '14px Arial';
+            ctx.fillText('Touch screen to restart', canvas.width / 2, canvas.height / 2 + 50);
+        }
+
+        function placeFood() {
+            const maxCols = canvas.width / gridSize;
+            const maxRows = canvas.height / gridSize;
+            let newFood, collisionWithSnake;
+            do {
+                collisionWithSnake = false;
+                newFood = {
+                    x: Math.floor(Math.random() * maxCols),
+                    y: Math.floor(Math.random() * maxRows)
+                };
+                for (let seg of snake) {
+                    if (seg.x === newFood.x && seg.y === newFood.y) {
+                        collisionWithSnake = true;
+                        break;
+                    }
+                }
+            } while (collisionWithSnake);
+            food = newFood;
+        }
+
+        function moveSnake() {
+            const head = { x: snake[0].x, y: snake[0].y };
+            switch (direction) {
+                case 'up': head.y--; break;
+                case 'down': head.y++; break;
+                case 'left': head.x--; break;
+                case 'right': head.x++; break;
+            }
+            snake.unshift(head);
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                placeFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+        function checkCollision() {
+            const head = snake[0];
+            const maxCols = canvas.width / gridSize;
+            const maxRows = canvas.height / gridSize;
+            if (head.x < 0 || head.x >= maxCols || head.y < 0 || head.y >= maxRows) {
+                gameOver = true;
+            }
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    gameOver = true;
+                }
+            }
+        }
+
+        function update() {
+            if (gameOver) return;
+            moveSnake();
+            checkCollision();
+        }
+
+        function draw() {
+            drawBackgroundGrid();
+            drawFood();
+            drawSnake();
+            drawScore();
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+            if (gameOver) {
+                clearInterval(gameInterval);
+                drawGameOverScreen();
+                // Notify parent about game over
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'bitgame',
+                        event: 'game-over',
+                        data: { 
+                            score: score, // Use actual score (1 point per food)
+                            metadata: { 
+                                length: snake.length,
+                                finalScore: score
+                            }
+                        }
+                    }, '*');
+                }
+            }
+        }
+
+        function startGame() {
+            if (gameInterval) clearInterval(gameInterval);
+            const startX = Math.floor((canvas.width / gridSize) / 2);
+            const startY = Math.floor((canvas.height / gridSize) / 2);
+            snake = [{ x: startX, y: startY }];
+            direction = 'right';
+      score = 0;
+      gameOver = false;
+            placeFood();
+            gameInterval = setInterval(gameLoop, 120);
+        }
+
+        function handleKeyPress(e) {
+            if (gameOver && e.key === 'Enter') {
+                startGame();
+                return;
+            }
+            const key = e.key;
+            if ((key === 'ArrowUp' || key.toLowerCase() === 'w') && direction !== 'down') direction = 'up';
+            else if ((key === 'ArrowDown' || key.toLowerCase() === 's') && direction !== 'up') direction = 'down';
+            else if ((key === 'ArrowLeft' || key.toLowerCase() === 'a') && direction !== 'right') direction = 'left';
+            else if ((key === 'ArrowRight' || key.toLowerCase() === 'd') && direction !== 'left') direction = 'right';
+        }
+
+        function handleTouch(e) {
+          e.preventDefault();
+            if (gameOver) {
+                startGame();
+                return;
+            }
+            const newDirection = e.currentTarget.dataset.direction;
+            if (newDirection === 'up' && direction !== 'down') direction = 'up';
+            else if (newDirection === 'down' && direction !== 'up') direction = 'down';
+            else if (newDirection === 'left' && direction !== 'right') direction = 'left';
+            else if (newDirection === 'right' && direction !== 'left') direction = 'right';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        document.addEventListener('keydown', handleKeyPress);
+        document.querySelectorAll('#mobile-controls .control-button').forEach(button => {
+            button.addEventListener('touchstart', handleTouch, { passive: false });
+        });
+        canvas.addEventListener('touchstart', (e) => {
+            if (gameOver) {
+                e.preventDefault();
+                startGame();
+            }
+        }, { passive: false });
+
+        resizeCanvas();
+        foodImage.onload = () => {
+            startGame();
+        };
+        if (foodImage.complete && foodImage.naturalWidth > 0) {
+            startGame();
+        }
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "slug": "stacks-quiz",
+  "name": "Stacks Quiz",
+  "description": "Test your knowledge about Stacks blockchain and Bitcoin Layer 2 technology!",
+  "thumbnail": "/games/stacks-quiz-thumb.png",
+  "type": "react",
+  "category": "educational"
+}

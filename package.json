@@ -1,0 +1,35 @@
+{
+  "name": "bitgame-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web3 gaming platform on Stacks blockchain",
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "dev": "pnpm run dev:api & pnpm run dev:web",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "build": "pnpm run build:api && pnpm run build:web",
+    "build:netlify": "pnpm run build:api && pnpm run build:web && pnpm run sync:games",
+    "sync:games": "pnpm --filter tools sync-games",
+    "seed": "pnpm --filter api seed",
+    "test:contracts": "cd apps/contracts && clarinet test",
+    "clarinet:devnet": "cd apps/contracts && clarinet devnet start"
+  },
+  "keywords": [
+    "web3",
+    "stacks",
+    "blockchain",
+    "gaming",
+    "clarity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}
+
+
+

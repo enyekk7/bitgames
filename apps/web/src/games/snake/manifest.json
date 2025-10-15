@@ -1,0 +1,11 @@
+{
+  "slug": "snake",
+  "name": "Snake Game",
+  "description": "Classic snake game. Eat food, grow longer, avoid walls!",
+  "thumbnail": "https://lqy3lriiybxcejon.public.blob.vercel-storage.com/d8cfc203-18c4-4dd1-8f01-27b4ad38815d/1_20251015_112200_0000-2XyctHm4JY0batq1a2Zh5nYA7ZDUhC.png",
+  "type": "react",
+  "category": "arcade"
+}
+
+
+

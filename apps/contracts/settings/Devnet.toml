@@ -1,0 +1,22 @@
+[network]
+name = "devnet"
+deployment_fee_rate = 10
+
+[accounts.deployer]
+mnemonic = "fetch outside black test wash cover just actual execute nice door want airport betray quantum stamp fish act pen trust portion fatigue scissors vague"
+balance = 100_000_000_000_000
+
+[accounts.wallet_1]
+mnemonic = "spoil sock coyote include verify comic jacket gain beauty tank flush victory illness edge reveal shallow plug hobby usual juice harsh pact wreck eight"
+balance = 100_000_000_000_000
+
+[accounts.wallet_2]
+mnemonic = "arrange scale orient half ugly kid bike twin magnet joke hurt fiber ethics super receive version wreck media fluid graduate anxiety seminar advanced dismiss"
+balance = 100_000_000_000_000
+
+[accounts.wallet_3]
+mnemonic = "glare mistake inch slush bench north shove thought dish social acoustic juice stay skirt market thing know atom law little vacant state accident diamond"
+balance = 100_000_000_000_000
+
+
+

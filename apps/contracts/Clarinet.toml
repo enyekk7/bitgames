@@ -1,0 +1,30 @@
+[project]
+name = "bitgame-contracts"
+description = "Smart contracts for Bitgame platform"
+authors = []
+telemetry = true
+cache_dir = "./.cache"
+requirements = []
+boot_contracts = ["pox", "costs-3", "bns"]
+
+[contracts.bit-token]
+path = "contracts/bit-token.clar"
+clarity_version = 2
+epoch = 2.4
+
+[contracts.game-registry]
+path = "contracts/game-registry.clar"
+clarity_version = 2
+epoch = 2.4
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
+
+
+

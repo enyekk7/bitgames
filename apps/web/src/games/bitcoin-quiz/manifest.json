@@ -1,0 +1,9 @@
+{
+  "slug": "bitcoin-quiz",
+  "name": "Bitcoin Quiz",
+  "description": "Test your Bitcoin knowledge! History, technology and facts.",
+  "thumbnail": "/games/bitcoin-quiz-thumb.png",
+  "type": "react",
+  "category": "educational"
+}
+

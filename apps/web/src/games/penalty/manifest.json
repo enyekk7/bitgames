@@ -1,0 +1,26 @@
+{
+  "id": "penalty",
+  "name": "Penalty Kick",
+  "description": "Test your penalty shooting skills! Aim and shoot past the goalkeeper to score goals.",
+  "version": "1.0.0",
+  "author": "BitGame",
+  "category": "Sports",
+  "difficulty": "Medium",
+  "thumbnail": "/games/penalty-thumb.png",
+  "image": "/games/pinalty.jpg",
+  "tags": ["football", "sports", "penalty", "goalkeeper", "shooting"],
+  "controls": "Click or tap to shoot the ball",
+  "objectives": [
+    "Score as many goals as possible",
+    "Avoid the goalkeeper's saves",
+    "Test your accuracy and timing"
+  ],
+  "features": [
+    "Dynamic goalkeeper movement",
+    "Progressive difficulty",
+    "Sound effects",
+    "Score tracking",
+    "Lives system"
+  ]
+}
+
