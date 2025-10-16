@@ -12,7 +12,7 @@
 - 🎯 **Multi-Game Platform**: Play Snake, Math Quiz, Bitcoin Quiz, Stacks Quiz, Tic-Tac-Toe, and Penalty Shootout
 - 🔗 **Web3 Integration**: Connect with Leather or Xverse wallets via Stacks Connect
 - 🏆 **On-Chain Verification**: Score verification through Clarity smart contracts
-- 💰 **BIT Token Economy**: Earn and tip with native BIT tokens
+- 💰 **STX Tip**: Earn and tip STX
 - 📱 **Social Gaming Feed**: Share achievements and interact with the community
 - 🏅 **Leaderboards**: Compete for top scores across all games
 - 👤 **User Profiles**: Track your gaming statistics and wallet balance
