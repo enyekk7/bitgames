@@ -51,3 +51,6 @@ apps/web/public/games-host/
 
 # External games (duplicate)
 games-external/
+
+# Netlify (old deployment)
+netlify/
