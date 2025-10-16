@@ -43,6 +43,11 @@ costs-reports.txt
 # Synced games
 apps/web/public/games-host/
 
-
-
+# Vercel
 .vercel
+
+# Cursor IDE
+.cursor/
+
+# External games (duplicate)
+games-external/
