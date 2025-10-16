@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "outputDirectory": "dist",
+  "framework": null,
+  "buildCommand": "echo 'Using pre-built files'",
+  "installCommand": "echo 'No install needed'",
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/games/(.*)",
+      "dest": "/games/$1"
+    },
+    {
+      "src": "/games-host/(.*)",
+      "dest": "/games-host/$1"
+    },
+    {
+      "src": "/(favicon\\.svg|icon\\.png)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://api-r4ha0h3ep-enyeks-projects-61a9bb1e.vercel.app"
+  }
+}

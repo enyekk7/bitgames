@@ -49,7 +49,7 @@ class BitgameBridge {
       
       // Get current user stats first to calculate consistency bonus
       let totalGamesPlayed = 0;
-      const apiUrl = 'http://localhost:3001'; // Hardcoded for testing
+      const apiUrl = 'https://api-r4ha0h3ep-enyeks-projects-61a9bb1e.vercel.app';
       console.log('🔧 BitgameBridge: Environment REACT_APP_API_URL:', typeof process !== 'undefined' ? process.env.REACT_APP_API_URL : 'undefined');
       console.log('🔧 BitgameBridge: Using API URL:', apiUrl);
       

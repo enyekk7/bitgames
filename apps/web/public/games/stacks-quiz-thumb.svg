@@ -1,0 +1,29 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a0a00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E67E22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F39C12;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="300" height="200" fill="url(#bg)"/>
+  
+  <!-- Stacks Logo/Icon -->
+  <circle cx="150" cy="80" r="25" fill="url(#text)" stroke="#E67E22" stroke-width="2"/>
+  <text x="150" y="88" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">S</text>
+  
+  <!-- Title -->
+  <text x="150" y="130" text-anchor="middle" fill="url(#text)" font-family="Arial, sans-serif" font-size="24" font-weight="bold">Stacks Quiz</text>
+  
+  <!-- Subtitle -->
+  <text x="150" y="150" text-anchor="middle" fill="#aaa" font-family="Arial, sans-serif" font-size="14">Bitcoin Layer 2</text>
+  
+  <!-- Quiz Icon -->
+  <text x="150" y="175" text-anchor="middle" fill="#E67E22" font-family="Arial, sans-serif" font-size="16">🧠</text>
+</svg>

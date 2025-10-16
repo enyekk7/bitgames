@@ -10,7 +10,6 @@
     "build:web": "pnpm --filter web build",
     "build:api": "pnpm --filter api build",
     "build": "pnpm run build:api && pnpm run build:web",
-    "build:netlify": "pnpm run build:api && pnpm run build:web && pnpm run sync:games",
     "sync:games": "pnpm --filter tools sync-games",
     "seed": "pnpm --filter api seed",
     "test:contracts": "cd apps/contracts && clarinet test",
@@ -26,8 +25,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "typescript": "^5.3.3"
   }
 }
 
