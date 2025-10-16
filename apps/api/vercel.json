@@ -13,7 +13,6 @@
     }
   ],
   "env": {
-    "MONGODB_URI": "mongodb+srv://bitgame77:bitgame77@cluster0.timtu1c.mongodb.net/bitgame?retryWrites=true&w=majority&appName=Cluster0&authSource=admin",
     "STACKS_NETWORK": "testnet",
     "STACKS_API_URL": "https://api.testnet.hiro.so"
   }

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://bitgame77:bitgame77@cluster0.timtu1c.mongodb.net/bitgame?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 export async function connectDB() {
   try {

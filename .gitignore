@@ -10,12 +10,13 @@ coverage/
 dist/
 build/
 
-# Environment
+# Environment variables (CRITICAL - contains sensitive data)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*
 
 # Logs
 npm-debug.log*
@@ -54,3 +55,31 @@ games-external/
 
 # Netlify (old deployment)
 netlify/
+
+# Database credentials and sensitive configs
+**/config/database.js
+**/config/secrets.js
+
+# Package lock files (optional - can be included for consistency)
+# package-lock.json
+# pnpm-lock.yaml
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE and editor files
+*.sublime-project
+*.sublime-workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json

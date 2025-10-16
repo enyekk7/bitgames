@@ -27,6 +27,6 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "https://api-r4ha0h3ep-enyeks-projects-61a9bb1e.vercel.app"
+    "VITE_API_URL": "@vite_api_url"
   }
 }
